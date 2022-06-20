@@ -15,9 +15,9 @@
 return array(
     /* 模块相关配置 */
     'AUTOLOAD_NAMESPACE' => array('Addons' => ONETHINK_ADDON_PATH), //扩展模块列表
-    'DEFAULT_MODULE' => 'Admin',
-    'MODULE_DENY_LIST' => array('Common', 'User'),
-//'MODULE_ALLOW_LIST'  => array('Home','Admin'),
+    'DEFAULT_MODULE' => 'GenesisShirt',
+//    'MODULE_DENY_LIST' => array('Common', 'User'),
+    'MODULE_ALLOW_LIST'  => array('GenesisShirt'),
 
     /* 系统数据加密设置 */
     'DATA_AUTH_KEY' => 'xVDCW4UlOqSocBsvb3NeP0HFnzuAwGgTEtpQ26hy', //默认数据加密KEY
