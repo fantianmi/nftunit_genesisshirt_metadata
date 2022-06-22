@@ -7,7 +7,15 @@ use Think\Controller;
 
 class IndexController extends Controller
 {
-
+    function json($return)
+    {
+        header('Content-Type:application/json; charset=utf-8');
+        header('Access-Control-Allow-Methods:*');
+        header('Access-Control-Allow-Headers:*');
+        header("Access-Control-Request-Headers:*");
+        echo json_encode($return);
+        exit;
+    }
     function erc1155()
     {
         $Metadata = new MetadataModel();
@@ -20,7 +28,7 @@ class IndexController extends Controller
                         DESIGN by 0xDomi 
                         Holding a Genesis Shirt nft qualifies you to redeem shirt merch in here (tshit.nftunit.site）";
         $data = $Metadata->create($image, $animation_url, $link, $name, $description);
-        echo json_encode($data);
+        $this->json($data);
     }
 
     function erc721DesinerCollctionBlack()
