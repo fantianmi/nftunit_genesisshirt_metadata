@@ -11,7 +11,8 @@ class IndexController extends Controller
     function erc1155()
     {
         $Metadata = new MetadataModel();
-        $image = "https://gateway.pinata.cloud/ipfs/QmS2aPSfLzrEpj9MJQwcwPaxZq5dB6arsieWbjoKDeL5D8";
+//        $image = "https://gateway.pinata.cloud/ipfs/QmS2aPSfLzrEpj9MJQwcwPaxZq5dB6arsieWbjoKDeL5D8";
+        $image = "https://themta.mypinata.cloud/ipfs/QmTwpqR5NjH1McZrMGp5qrwMzhKQ9ENygfnMkiPNN77zjg/2949.png";
         $animation_url = "https://gateway.pinata.cloud/ipfs/QmWaHPdkqpG8eu3M6K3QRJz5rvRLhZgmwF5kPGTFSZnKCj/1155.gif";
         $link = "http://tshit.nftunit.site";
         $name = "NFTUNIT GENESIS SHIRT";
