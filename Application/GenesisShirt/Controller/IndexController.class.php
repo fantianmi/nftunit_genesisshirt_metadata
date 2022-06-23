@@ -10,8 +10,8 @@ use Think\Controller;
  * erc1155 http://metadata.genesis.domi.nftunit.site/GenesisShirt/index/erc1155
  *
  * Rinkeby:
- * GenesisShirt 0x0c88BE2d77Af4E715a6b93D732c3D9586692c443
- * GenesisShirtRedeemable 0x81B07EA765CD1757598e14fC767c330ed3C6eD3B
+ * GenesisShirt721 0x0c88BE2d77Af4E715a6b93D732c3D9586692c443
+ * GenesisShirtRedeemable1155 0x218dBC824de5566343AD3C9BEf9D90d006aC1828
  * usdc 0xc39F044ADe74b2725A63C3c839Bb5745301681E6
  *
  *
@@ -49,8 +49,29 @@ class IndexController extends Controller
         $this->json($return);
     }
 
+    /**
+     *
+     *
+     * @param $address
+     * @param $shirt
+     * @param $name
+     * @param $phone
+     * @param $wallet
+     * @param $tokenId
+     */
     function redeem($address, $shirt, $name, $phone, $wallet, $tokenId)
     {
+
+        $exist = M("GshirtSale")->where(['tokenId' => $tokenId])->find();
+        if ($exist) {
+            $this->jsonError("非法操作，#{$tokenId} 已经入库");
+        }
+
+        //TODO 过程
+        /**
+         * 1. 校验wallet 是否等于 ownerOf (tokenId)
+         * 2. 校验成功后，改写metadata，保存数据
+         */
         $data = [
             'address' => $address,
             'name' => $name,
@@ -117,52 +138,4 @@ class IndexController extends Controller
         }
         $this->json($data);
     }
-
-//    function erc721DesinerCollctionBlack()
-//    {
-//        $Metadata = new MetadataModel();
-//        $image = "https://gateway.pinata.cloud/ipfs/QmS2aPSfLzrEpj9MJQwcwPaxZq5dB6arsieWbjoKDeL5D8";
-//        $animation_url = "https://gateway.pinata.cloud/ipfs/QmWaHPdkqpG8eu3M6K3QRJz5rvRLhZgmwF5kPGTFSZnKCj/721%20designer%20collection%28black%29.gif";
-//        $link = "http://tshirt.nftunit.site";
-//        $name = "designer collection(black)";
-//        $description = "THE FIRST IRL COLLECTION OF NFTUNIT COMMUNITY. DESIGN by 0xDomi Holding a Genesis Shirt nft qualifies you to redeem shirt merch in here (tshirt.nftunit.site）";
-//        $data = $Metadata->create($image, $animation_url, $link, $name, $description);
-//        $this->json($data);
-//    }
-//
-//    function erc721DesinerCollctionWhite()
-//    {
-//        $Metadata = new MetadataModel();
-//        $image = "https://gateway.pinata.cloud/ipfs/QmS2aPSfLzrEpj9MJQwcwPaxZq5dB6arsieWbjoKDeL5D8";
-//        $animation_url = "https://gateway.pinata.cloud/ipfs/QmWaHPdkqpG8eu3M6K3QRJz5rvRLhZgmwF5kPGTFSZnKCj/721%20designer%20collection%28white%29.gif`";
-//        $link = "http://tshirt.nftunit.site";
-//        $name = "designer collection(white)";
-//        $description = "THE FIRST IRL COLLECTION OF NFTUNIT COMMUNITY. DESIGN by 0xDomi Holding a Genesis Shirt nft qualifies you to redeem shirt merch in here (tshirt.nftunit.site）";
-//        $data = $Metadata->create($image, $animation_url, $link, $name, $description);
-//        $this->json($data);
-//    }
-//
-//    function erc721CommunityPFPCollectionBlack()
-//    {
-//        $Metadata = new MetadataModel();
-//        $image = "https://gateway.pinata.cloud/ipfs/QmS2aPSfLzrEpj9MJQwcwPaxZq5dB6arsieWbjoKDeL5D8";
-//        $animation_url = "https://gateway.pinata.cloud/ipfs/QmWaHPdkqpG8eu3M6K3QRJz5rvRLhZgmwF5kPGTFSZnKCj/721%20community%20PFP%20collection%28black%29.gif";
-//        $link = "http://tshirt.nftunit.site";
-//        $name = "community PFP collection(black)";
-//        $description = "THE FIRST IRL COLLECTION OF NFTUNIT COMMUNITY. DESIGN by 0xDomi Holding a Genesis Shirt nft qualifies you to redeem shirt merch in here (tshirt.nftunit.site）";
-//        $data = $Metadata->create($image, $animation_url, $link, $name, $description);
-//        $this->json($data);
-//    }
-//
-//    function erc721CommunityPFPCollectionWhite()
-//    {
-//        $Metadata = new MetadataModel();
-//        $image = "https://gateway.pinata.cloud/ipfs/QmS2aPSfLzrEpj9MJQwcwPaxZq5dB6arsieWbjoKDeL5D8";
-//        $animation_url = "https://gateway.pinata.cloud/ipfs/QmWaHPdkqpG8eu3M6K3QRJz5rvRLhZgmwF5kPGTFSZnKCj/721%20community%20PFP%20collection%28white%29.gif";
-//        $link = "http://tshirt.nftunit.site";
-//        $name = "community PFP collection(white)";
-//        $description = "THE FIRST IRL COLLECTION OF NFTUNIT COMMUNITY. DESIGN by 0xDomi Holding a Genesis Shirt nft qualifies you to redeem shirt merch in here (tshirt.nftunit.site）";
-//        $data = $Metadata->create($image, $animation_url, $link, $name, $description);
-//        $this->json($data);
-//    }
 }
